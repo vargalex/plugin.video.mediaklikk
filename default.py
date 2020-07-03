@@ -65,12 +65,13 @@ def live_tv():
     m = client.parseDOM(m, 'li')
     for item in m:
         url = client.parseDOM(item, 'a', ret='href')[0]
-        if not url.startswith('http:'): url = 'http:' + url
-        name = client.parseDOM(item, 'a')[0]
-        name = name.split('>')[-1].strip()
-        try: label = epglist.get_epg(name, active=True)
-        except: label = name
-        addFile(label, url, 7, MediaDir + '\\' + name.lower() + '.png', '')
+        if "-elo" in url:
+            if not url.startswith('http:'): url = 'http:' + url
+            name = client.parseDOM(item, 'a')[0]
+            name = name.split('>')[-1].strip()
+            try: label = epglist.get_epg(name, active=True)
+            except: label = name
+            addFile(label, url, 7, MediaDir + '\\' + name.lower() + '.png', '')
     return
 
 def live_radio():
@@ -97,10 +98,10 @@ def play_url(url, iconimage, name):
     xbmc.Player().play(url, videoitem)
     
 def get_Tv():   
-    m = client.request('https://player.mediaklikk.hu/player/player-external-vod-full.php?token=' + url)
+    m = client.request('https://player.mediaklikk.hu/playernew/player.php?video=' + url)
     m = m.replace('\\', '')
     direct_url = re.search('"file"\s*:\s*"([^"]+)', m).group(1)
-    chunk_list = client.request(direct_url)
+    chunk_list = client.request('http:%s' % direct_url)
     chunk_list = chunk_list.replace('\n', '')
     chunk_list = re.compile('BANDWIDTH=([0-9]+)(.+?m3u8)').findall(chunk_list)
     if len(chunk_list) == 0: direct_url = direct_url[0]
@@ -120,7 +121,7 @@ def get_Tv():
             else:
                 stream = chunk_list[q][1]
         direct_url = direct_url.split('playlist')[0] + stream
-    play_url(direct_url, iconimage, name)
+    play_url('http:%s' % direct_url, iconimage, name)
 
 
 def get_liveTv():

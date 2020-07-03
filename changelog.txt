@@ -1,4 +1,8 @@
-﻿V1.1.0
+﻿V1.1.1
+- Élő stream-ek módosítása
+- Forrás változás követése
+
+V1.1.0
 - Élő stream-ek javítva
 - TODO: M3 műsorinfó
 
