@@ -1,18 +1,25 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.mediaklikk" name="MédiaKlikk" version="1.1.1" provider-name="Salad Fingers">
+<addon id="plugin.video.mediaklikk" name="MédiaKlikk" version="1.1.3" provider-name="Salad Fingers">
 	<requires>
-		<import addon="xbmc.python" version="2.14.0"/>
+		<import addon="script.module.requests" />
+		<import addon="script.module.requests-cache" />
+		<import addon="script.module.kodi-six" />
 	</requires>
 	<extension point="xbmc.python.pluginsource" library="default.py">
 		<provides>video</provides>
 	</extension>
 	<extension point="xbmc.addon.metadata">
+		<reuselanguageinvoker>true</reuselanguageinvoker>
 		<summary lang="hu">MédiaKlikk</summary>
 		<language>hu</language>
-		<description lang="hu">MédiaKlikk</description>
+		<description lang="hu">Kodi kiegészítő a MédiaKlikk weboldal tartalmaihoz.</description>
 		<platform>all</platform>
 		<news>
-- Élő stream-ek módosítása
-- Forrás változás követése</news>
+- Sebesség optimalizálás
+- Hibajavítások</news>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
 	</extension>
 </addon>
