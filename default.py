@@ -9,13 +9,15 @@ from resources.lib import m3u8_parser, client
 try:
     from urlparse import parse_qsl
     from urllib import quote_plus
+    from xbmc import translatePath
 except:
     from urllib.parse import quote_plus, parse_qsl
+    from xbmcvfs import translatePath
 
 _url = sys.argv[0]
 _handle = int(sys.argv[1])
 __addon__ = xbmcaddon.Addon()
-MediaDir = xbmc.translatePath(os.path.join(__addon__.getAddonInfo('path'), 'resources', 'media'))
+MediaDir = translatePath(os.path.join(__addon__.getAddonInfo('path'), 'resources', 'media'))
 _addonFanart = __addon__.getAddonInfo('fanart')
 _addonIcon = __addon__.getAddonInfo('icon')
 __addon__.setSetting('ver', __addon__.getAddonInfo('version'))

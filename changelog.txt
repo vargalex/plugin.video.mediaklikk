@@ -1,4 +1,7 @@
-﻿V1.1.3
+﻿v1.1.4
+- Nexus kompatibilitás
+
+V1.1.3
 - Sebesség optimalizálás
 - Hibajavítások
 
