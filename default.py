@@ -142,11 +142,7 @@ def resolve(title, url, media):
 
                 else:
                     streamURL = streamURL[0].replace('\/','/')
-                    stream = parse_m3u8(streamURL)
-                    if stream:
-                        streamURL = streamURL.rsplit('/', 1)[0] + '/' + stream
-                    else:
-                        streamURL = None
+                    
             else:
                 streamURL = None
 
