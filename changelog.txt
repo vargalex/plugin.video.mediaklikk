@@ -1,4 +1,7 @@
-﻿v1.1.4
+﻿v.1.1.5
+- Hang sáv támogatás, automatikus felbontás választás
+
+v1.1.4
 - Nexus kompatibilitás
 
 V1.1.3

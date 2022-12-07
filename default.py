@@ -128,7 +128,6 @@ def resolve(title, url, media):
         if title == 'M3':
             r = client.request('https://archivum.mtva.hu/m3/stream?no_lb=1&target=live')
             streamURL = r.json()['url']
-            streamURL = parse_m3u8(streamURL)
 
         else:
             r = client.request('https://player.mediaklikk.hu/playernew/player.php?noflash=yes&video=' + quote_plus(url))
@@ -153,32 +152,6 @@ def resolve(title, url, media):
 
     play_item.setPath(path=streamURL)
     xbmcplugin.setResolvedUrl(_handle, True, listitem=play_item)
-
-
-def parse_m3u8(url):
-
-    if url.startswith('//'): url = 'https:' + url
-    data = m3u8_parser.parse(client.request(url, headers={'Referer': BASE_URL}).text)['playlists']
-
-    q_type = 'resolution' if data[0]['stream_info'].get('resolution', False) else 'bandwidth'
-    m3u8_playlist = [(i['uri'], i['stream_info'][q_type]) for i in data]
-    m3u8_playlist.sort(key=lambda x: int(str(x[1]).split('x')[0]), reverse=True)
-
-    q_list = [str(i[1]) for i in m3u8_playlist]
-    q_list = [q.replace('3000000', '720p').replace('1600000', '480p').replace('1200000', '360p').replace('800000', '290p').replace('400000', '180p') for q in q_list]
-
-    auto_pick = __addon__.getSetting('autopick') == '1'
-
-    if auto_pick == True:
-        stream = m3u8_playlist[0][0]
-    else:
-        q = xbmcgui.Dialog().select(u'Minőség', q_list)
-        if q == -1:
-            return
-        else:
-            stream = m3u8_playlist[q][0]
-
-    return stream
 
 
 def addDirectoryItem(name, query, icon=None, context=None, queue=False, isFolder=True, meta=None):

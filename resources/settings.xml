@@ -2,7 +2,6 @@
 <settings>
     <category label="Általános">
     	<setting id="showepg" type="bool" label="Aktuális műsor megjelenítése" default="true" />
-        <setting label="Video minősége" type="enum" id="autopick" default="1" values="Választható|Legjobb" />
         <setting label="EPG időeltolás (óra)" type="slider" id="gmt.offset" range="-12,1,12" default="0" option="int" />
         <setting id="ver" type="text" default="" visible="false" />
     </category>
