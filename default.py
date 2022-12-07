@@ -4,7 +4,7 @@ from __future__ import absolute_import, unicode_literals
 from kodi_six import xbmc, xbmcgui, xbmcplugin, xbmcaddon
 import re, os, json, sys
 import requests
-from resources.lib import m3u8_parser, client
+from resources.lib import client
 
 try:
     from urlparse import parse_qsl
