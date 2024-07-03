@@ -130,18 +130,25 @@ def resolve(title, url, media):
             streamURL = r.json()['url']
 
         else:
-            r = client.request('https://player.mediaklikk.hu/playernew/player.php?noflash=yes&video=' + quote_plus(url))
-            files = re.findall("""['"]file['"]\s*:\s*['"]([^'"]+)""", r.text)
+            resp = client.request('https://player.mediaklikk.hu/playernew/player.php?noflash=yes&video=' + quote_plus(url)).text
 
-            if files:
-                streamURL = [i for i in files if re.search('\.m3u8', i)]
-                if not streamURL:
-                    dialog = xbmcgui.Dialog()
-                    dialog.notification('', 'DRM védett tartalom.\nJelenleg nem támogatott.', sound=False)
+            json_regex_patt = r"setup\((.*?)\);"
+            json_text = re.search(json_regex_patt, resp, re.DOTALL).group(1)
+            norm_json = json.loads(json_text)
 
-                else:
-                    streamURL = streamURL[0].replace('\/','/')
-                    
+            hls_entry = None
+            streamURL = None
+            if norm_json:
+                for item_x in norm_json['playlist']:
+                    if title == 'M4 Sport':
+                        if item_x["type"] == "hls" and "Seconds" not in item_x["file"]:
+                            hls_entry = item_x
+                    if hls_entry:
+                        streamURL = hls_entry['file']
+                    elif 'index.m3u8' in item_x['file']:
+                        streamURL = item_x['file']
+                    else:
+                        streamURL = norm_json['playlist'][0]['file']
             else:
                 streamURL = None
 
