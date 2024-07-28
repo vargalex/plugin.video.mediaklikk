@@ -1,6 +1,9 @@
 ﻿v.1.1.6
 - M4 Sport fix
 
+v.1.1.6
+- M4 Sport fix
+
 v.1.1.5
 - Hang sáv támogatás, automatikus felbontás választás
 

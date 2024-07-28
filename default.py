@@ -76,7 +76,6 @@ def episode_list(url, id, page=0):
     xbmcplugin.setContent(_handle, 'videos')
     xbmcplugin.endOfDirectory(_handle, cacheToDisc=False)
 
-
 def live_channels():
     
     from resources.lib import epglist
@@ -84,19 +83,27 @@ def live_channels():
                 {'title': u'M1', 'url': 'mtv1live', 'icon': 'm1.png', 'type': 'tv', 'epg': '1'},
                 {'title': u'M2', 'url': 'mtv2live', 'icon': 'm2.png', 'type': 'tv', 'epg': '2'},
                 {'title': u'M3', 'url': '', 'icon': 'm3.png', 'type': 'tv'},
-                {'title': u'M4 Sport', 'url': 'mtv4live', 'icon': 'm4.png', 'type': 'tv', 'epg': '30'},
-                {'title': u'M4 Sport +', 'url': 'mtv4plus', 'icon': 'm4.png', 'type': 'tv', 'epg': '34'},
+
+                {'title': u'M4 Sport', 'url': 'mtv4live', 'icon': 'm4 sport.png', 'type': 'tv', 'epg': '30'},
+                {'title': u'M4 Sport (1)', 'url': 'm4sport1', 'icon': 'm4 sport.png', 'type': 'tv', 'epg': '37'},
+                {'title': u'M4 Sport (2)', 'url': 'm4sport2', 'icon': 'm4 sport.png', 'type': 'tv', 'epg': '38'},
+                {'title': u'M4 Sport (3)', 'url': 'm4sport3', 'icon': 'm4 sport.png', 'type': 'tv', 'epg': '39'},
+                {'title': u'M4 Sport (4)', 'url': 'm4sport4', 'icon': 'm4 sport.png', 'type': 'tv', 'epg': '40'},
+                {'title': u'M4 Sport (5)', 'url': 'm4sport5', 'icon': 'm4 sport.png', 'type': 'tv', 'epg': '41'},
+
+                {'title': u'M4 Sport +', 'url': 'mtv4plus', 'icon': 'm4 sport.png', 'type': 'tv', 'epg': '34'},
                 {'title': u'M5', 'url': 'mtv5live', 'icon': 'm5.png', 'type': 'tv', 'epg': '33'},
                 {'title': u'Duna', 'url': 'dunalive', 'icon': 'duna.png', 'type': 'tv', 'epg': '3'},
-                {'title': u'Duna World', 'url': 'dunaworldlive', 'icon': 'dunaworld.png', 'type': 'tv', 'epg': '4'},
-                
+                {'title': u'Duna World', 'url': 'dunaworldlive', 'icon': 'duna world.png', 'type': 'tv', 'epg': '4'},
+
+                {'title': u'Nemzeti Sportrádió', 'url': 'nss', 'icon': 'nsr.png', 'type': 'tv', 'epg': '47'},
                 {'title': u'Kossuth Rádió', 'url': '/kossuth-radio-elo/', 'icon': 'kossuth.png', 'type': 'radio'},
                 {'title': u'Petőfi Rádió', 'url': '/petofi-radio-elo', 'icon': 'petofi.png', 'type': 'radio'},
                 {'title': u'Bartók Rádió', 'url': '/bartok-radio-elo/', 'icon': 'bartok.png', 'type': 'radio'},
                 {'title': u'Dankó Rádió', 'url': '/danko-radio-elo', 'icon': 'danko.png', 'type': 'radio'},
                 {'title': u'Nemzetiségi Rádió', 'url': '/nemzetisegi-adasok-elo/', 'icon': 'nemzetisegi.png', 'type': 'radio'},
                 {'title': u'Parlamenti Rádió', 'url': '/parlamenti-adasok-elo', 'icon': 'parlamenti.png', 'type': 'radio'},
-                {'title': u'Duna World Rádió', 'url': '/duna-world-radio-elo/', 'icon': 'dunaworld.png', 'type': 'radio'}
+                {'title': u'Duna World Rádió', 'url': '/duna-world-radio-elo/', 'icon': 'duna world.png', 'type': 'radio'}
                 ]
 
     for channel in channels:
@@ -140,8 +147,8 @@ def resolve(title, url, media):
             streamURL = None
             if norm_json:
                 for item_x in norm_json['playlist']:
-                    if title == 'M4 Sport':
-                        if item_x["type"] == "hls" and "Seconds" not in item_x["file"]:
+                    if re.search(r'M4 Sport', title):
+                        if item_x["type"] == "hls" and "Seconds" and "paris" not in item_x["file"]:
                             hls_entry = item_x
                     if hls_entry:
                         streamURL = hls_entry['file']
