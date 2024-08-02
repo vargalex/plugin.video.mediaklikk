@@ -1,4 +1,7 @@
-﻿v.1.1.6
+﻿v.1.1.8
+- Duna World fix
+
+v.1.1.7
 - M4 Sport fix
 
 v.1.1.6

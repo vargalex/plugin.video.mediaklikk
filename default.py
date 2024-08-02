@@ -143,19 +143,13 @@ def resolve(title, url, media):
             json_text = re.search(json_regex_patt, resp, re.DOTALL).group(1)
             norm_json = json.loads(json_text)
 
-            hls_entry = None
             streamURL = None
             if norm_json:
-                for item_x in norm_json['playlist']:
-                    if re.search(r'M4 Sport', title):
-                        if item_x["type"] == "hls" and "Seconds" and "paris" not in item_x["file"]:
-                            hls_entry = item_x
-                    if hls_entry:
-                        streamURL = hls_entry['file']
-                    elif 'index.m3u8' in item_x['file']:
-                        streamURL = item_x['file']
-                    else:
-                        streamURL = norm_json['playlist'][0]['file']
+                play_entry = next((x for x in norm_json["playlist"] if "bumper" not in x["file"]), None)
+                if play_entry and play_entry["type"] == "hls":
+                    streamURL = play_entry["file"]
+                else:
+                    streamURL = norm_json['playlist'][0]['file']
             else:
                 streamURL = None
 
