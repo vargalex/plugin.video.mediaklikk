@@ -31,7 +31,7 @@ addonUserDataFolder = transPath(addon.getAddonInfo('profile'))
 CACHE_FILE = os.path.join(addonUserDataFolder, 'requests_cache')
 
 
-def request(url, headers=None, cache=False):
+def request(url, headers=None, XHR=False, cache=False):
 
     requests_cache.install_cache(CACHE_FILE, backend='sqlite', expire_after=86400)
 
@@ -57,7 +57,12 @@ def request(url, headers=None, cache=False):
     else:
         response = requests.get(url, headers=headers)
 
-    return response
+    if XHR == True:
+        result = response.json()
+    else:
+        result = response.text
+
+    return response or result
 
 
 def get_user_agent():

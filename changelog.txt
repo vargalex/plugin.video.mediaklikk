@@ -1,4 +1,7 @@
-﻿v.1.1.8
+﻿v.1.2.1
+- API-ról html parse-ra átállás by Hege
+
+v.1.1.8
 - Duna World fix
 
 v.1.1.7
