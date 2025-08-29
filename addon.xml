@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.mediaklikk" name="MédiaKlikk" version="1.2.1" provider-name="Salad Fingers, vargalex, heg">
+<addon id="plugin.video.mediaklikk" name="MédiaKlikk" version="1.2.2" provider-name="Salad Fingers, vargalex, heg">
 	<requires>
 		<import addon="script.module.beautifulsoup4" version="4.6.2"/>
 		<import addon="script.module.resolveurl" version="5.1.00"/>
+		<import addon="xbmc.python" version="3.0.0"/>
 		<import addon="script.module.requests" version="2.22.0"/>
 		<import addon="script.module.requests-cache" />
 		<import addon="script.module.kodi-six" />
@@ -18,7 +19,12 @@
 		<description lang="hu">Kodi kiegészítő a MédiaKlikk weboldal tartalmaihoz.</description>
 		<platform>all</platform>
 		<news>
-- API-ról html parse-ra átállás</news>
+1.2.2:
+- oldal változás lekövetve
+- főoldal menük hozzáadva
+- Kereső hozzáadva
+- Élő lejátszásnál a csatorna és a műsor címe hozzáadva
+		</news>
 		<assets>
 			<icon>icon.png</icon>
 			<fanart>fanart.jpg</fanart>

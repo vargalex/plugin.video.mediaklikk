@@ -1,4 +1,10 @@
-﻿v.1.2.1
+﻿v.1.2.2
+- oldal változás lekövetve
+- főoldal menük hozzáadva
+- Kereső hozzáadva
+- Élő lejátszásnál a csatorna és a műsor címe hozzáadva
+
+v.1.2.1
 - API-ról html parse-ra átállás by Hege
 
 v.1.1.8
